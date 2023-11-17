@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, PermissionsAndroid } from "react-native";
 import uuid from "uuid";
 import RNCallKeep from "react-native-callkeep";
 import BackgroundTimer from "react-native-background-timer";
@@ -33,6 +33,27 @@ const styles = StyleSheet.create({
   },
   log: {
     fontSize: 10,
+  },
+});
+
+RNCallKeep.setup({
+  ios: {
+    appName: "CallKeepDemo",
+  },
+  android: {
+    alertTitle: "Permissions required",
+    alertDescription: "This application needs to access your phone accounts",
+    cancelButton: "Cancel",
+    okButton: "ok",
+    imageName: "phone_account_icon",
+    additionalPermissions: [PermissionsAndroid.PERMISSIONS.example],
+    // Required to get audio in background when using Android 11
+    foregroundService: {
+      channelId: "com.company.my",
+      channelName: "Foreground service for my app",
+      notificationTitle: "My app is running on background",
+      notificationIcon: "Path to the resource icon of the notification",
+    },
   },
 });
 

@@ -4,6 +4,8 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+import io.wazo.callkeep.RNCallKeepModule; // Add these import lines
+import androidx.annotation.NonNull;
 
 public class MainActivity extends ReactActivity {
 
@@ -28,5 +30,16 @@ public class MainActivity extends ReactActivity {
         getMainComponentName(),
         // If you opted-in for the New Architecture, we enable the Fabric Renderer.
         DefaultNewArchitectureEntryPoint.getFabricEnabled());
+  }
+  
+  // Permission results
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+      switch (requestCode) {
+          case RNCallKeepModule.REQUEST_READ_PHONE_STATE:
+              RNCallKeepModule.onRequestPermissionsResult(requestCode, permissions, grantResults);
+              break;
+      }
   }
 }
