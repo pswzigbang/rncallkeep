@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import "react-native-get-random-values";
+
+import React, { useState, useEffect, useRef } from "react";
 import { Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, PermissionsAndroid } from "react-native";
-import uuid from "uuid";
+// import uuid from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import RNCallKeep from "react-native-callkeep";
 import BackgroundTimer from "react-native-background-timer";
 import DeviceInfo from "react-native-device-info";
@@ -36,28 +39,28 @@ const styles = StyleSheet.create({
   },
 });
 
-RNCallKeep.setup({
-  ios: {
-    appName: "CallKeepDemo",
-  },
-  android: {
-    alertTitle: "Permissions required",
-    alertDescription: "This application needs to access your phone accounts",
-    cancelButton: "Cancel",
-    okButton: "ok",
-    imageName: "phone_account_icon",
-    additionalPermissions: [PermissionsAndroid.PERMISSIONS.example],
-    // Required to get audio in background when using Android 11
-    foregroundService: {
-      channelId: "com.company.my",
-      channelName: "Foreground service for my app",
-      notificationTitle: "My app is running on background",
-      notificationIcon: "Path to the resource icon of the notification",
-    },
-  },
-});
+// RNCallKeep.setup({
+//   ios: {
+//     appName: "CallKeepDemo",
+//   },
+//   android: {
+//     alertTitle: "Permissions required",
+//     alertDescription: "This application needs to access your phone accounts",
+//     cancelButton: "Cancel",
+//     okButton: "ok",
+//     imageName: "phone_account_icon",
+//     additionalPermissions: [PermissionsAndroid.PERMISSIONS.BIND_TELECOM_CONNECTION_SERVICE],
+//     // Required to get audio in background when using Android 11
+//     foregroundService: {
+//       channelId: "com.company.my",
+//       channelName: "Foreground service for my app",
+//       notificationTitle: "My app is running on background",
+//       notificationIcon: "Path to the resource icon of the notification",
+//     },
+//   },
+// });
 
-const getNewUuid = () => uuid.v4().toLowerCase();
+const getNewUuid = () => uuidv4();
 
 const format = (_uuid) => _uuid.split("-")[0];
 
@@ -102,6 +105,8 @@ const Callkeep = () => {
     addCall(callUUID, number);
 
     log(`[displayIncomingCall] ${format(callUUID)}, number: ${number}`);
+
+    console.log("first", callUUID, number, number, "number", false);
 
     RNCallKeep.displayIncomingCall(callUUID, number, number, "number", false);
   };
@@ -195,12 +200,14 @@ const Callkeep = () => {
 
   const updateDisplay = (callUUID) => {
     const number = calls[callUUID];
+    console.log("number", number, callUUID, calls);
     // Workaround because Android doesn't display well displayName, se we have to switch ...
-    if (isIOS) {
-      RNCallKeep.updateDisplay(callUUID, "New Name", number);
-    } else {
-      RNCallKeep.updateDisplay(callUUID, number, "New Name");
-    }
+    RNCallKeep.updateDisplay(callUUID, "새로운 이름", number);
+    // if (isIOS) {
+    //   RNCallKeep.updateDisplay(callUUID, "New Name", number);
+    // } else {
+    //   RNCallKeep.updateDisplay(callUUID, number, "New Name");
+    // }
 
     log(`[updateDisplay: ${number}] ${format(callUUID)}`);
   };
@@ -214,18 +221,58 @@ const Callkeep = () => {
     RNCallKeep.addEventListener("endCall", endCall);
 
     return () => {
-      RNCallKeep.removeEventListener("answerCall", answerCall);
-      RNCallKeep.removeEventListener("didPerformDTMFAction", didPerformDTMFAction);
-      RNCallKeep.removeEventListener("didReceiveStartCallAction", didReceiveStartCallAction);
-      RNCallKeep.removeEventListener("didPerformSetMutedCallAction", didPerformSetMutedCallAction);
-      RNCallKeep.removeEventListener("didToggleHoldCallAction", didToggleHoldCallAction);
-      RNCallKeep.removeEventListener("endCall", endCall);
+      // RNCallKeep.removeEventListener("answerCall", answerCall);
+      // RNCallKeep.removeEventListener("didPerformDTMFAction", didPerformDTMFAction);
+      // RNCallKeep.removeEventListener("didReceiveStartCallAction", didReceiveStartCallAction);
+      // RNCallKeep.removeEventListener("didPerformSetMutedCallAction", didPerformSetMutedCallAction);
+      // RNCallKeep.removeEventListener("didToggleHoldCallAction", didToggleHoldCallAction);
+      // RNCallKeep.removeEventListener("endCall", endCall);
     };
   }, []);
 
-  if (isIOS && DeviceInfo.isEmulator()) {
-    return <Text style={styles.container}>CallKeep doesn't work on iOS emulator</Text>;
-  }
+  const callsRef = useRef(calls);
+  useEffect(() => {
+    callsRef.current = calls; // 최신 상태를 useRef에 저장
+  }, [calls]);
+
+  useEffect(() => {
+    const ws = new WebSocket("ws://192.168.0.39:8080");
+    // 연결이 열렸을 때
+    ws.onopen = () => {
+      // 서버에 메시지 보내기
+      ws.send("Hello Server!");
+    };
+
+    // 서버로부터 메시지를 받았을 때
+    ws.onmessage = (e) => {
+      // 메시지 받기
+      console.log(e.data);
+
+      if (e.data === "call") {
+        displayIncomingCall(getRandomNumber());
+      }
+
+      if (e.data === "hang") {
+        Object.keys(callsRef.current).forEach((callUUID) => hangup(callUUID));
+      }
+    };
+
+    // 에러 발생 시
+    ws.onerror = (e) => {
+      // 에러 핸들링
+      console.error(e.message);
+    };
+
+    // 연결이 닫혔을 때
+    ws.onclose = (e) => {
+      // 연결 종료 핸들링
+      console.log("WebSocket is closed");
+    };
+  }, []);
+
+  // if (isIOS && DeviceInfo.isEmulator()) {
+  //   return <Text style={styles.container}>CallKeep doesn't work on iOS emulator</Text>;
+  // }
 
   return (
     <View style={styles.container}>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847013455492",
+    "project_id": "callkeep-poc-f5129",
+    "storage_bucket": "callkeep-poc-f5129.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847013455492:android:337508d1b01aba0b7a04d1",
+        "android_client_info": {
+          "package_name": "com.zigbang.smarthome.callkeep.poc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn__4qpqcRIvNl_0CSXDlevOInzHCwBEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

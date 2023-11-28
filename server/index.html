@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    WebSocket Test
+    <button type="button" id="call_btn">Call</button>
+    <button type="button" id="hang_btn">Hang</button>
+    <script>
+      const ws = new WebSocket("ws://localhost:8080");
+
+      document.getElementById("call_btn").addEventListener("click", () => {
+        ws.send("call");
+      });
+      document.getElementById("hang_btn").addEventListener("click", () => {
+        ws.send("hang");
+      });
+    </script>
+  </body>
+</html>

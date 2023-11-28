@@ -13,31 +13,18 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
-      <!-- <service android:name="io.wazo.callkeep.VoiceConnectionService"
-          android:label="Wazo"
-          android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
-          <intent-filter>
-              <action android:name="android.telecom.ConnectionService" />
-          </intent-filter>
-      </service> -->
-      <!-- <service android:name="io.wazo.callkeep.VoiceConnectionService"
-          android:label="Wazo"
-          android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE"
-          android:foregroundServiceType="camera|microphone"
-          android:foregroundServiceType="phoneCall"
+      <service 
+        android:name="io.wazo.callkeep.VoiceConnectionService"
+        android:label="Wazo"
+        android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE"
+        android:foregroundServiceType="camera|microphone"
+        android:exported="true"
       >
-          <intent-filter>
-              <action android:name="android.telecom.ConnectionService" />
-          </intent-filter>
-      </service> -->
-      <service android:name="io.wazo.callkeep.VoiceConnectionService"
-                android:label="Wazo"
-                android:permission="android.permissin.BIND_TELECOM_CONNECTION_SERVICE"
-                android:exported="true">
-          <intent-filter>
-              <action android:name="android.telecom.ConnectionService" />
-          </intent-filter>
+        <intent-filter>
+            <action android:name="android.telecom.ConnectionService" />
+        </intent-filter>
       </service>
+      <service android:name="io.wazo.callkeep.RNCallKeepBackgroundMessagingService" />
       <service android:name="io.wazo.callkeep.RNCallKeepBackgroundMessagingService" />
       <activity
         android:name=".MainActivity"

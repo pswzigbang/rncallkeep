@@ -45,6 +45,8 @@ target 'rncallkeep' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNCallKeep', :path => '../node_modules/react-native-callkeep'
+
   target 'rncallkeepTests' do
     inherit! :complete
     # Pods for testing
