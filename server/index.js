@@ -1,4 +1,14 @@
 const WebSocket = require("ws");
+const express = require("express");
+
+const app = express();
+const port = 3000;
+
+app.use(express.static(__dirname));
+
+app.listen(port, () => {
+  console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
+});
 
 // 웹소켓 서버 생성
 const wss = new WebSocket.Server({ port: 8080 });

@@ -1,4 +1,4 @@
-package com.rncallkeep;
+package com.zigbang.smarthome.callkeep.poc;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

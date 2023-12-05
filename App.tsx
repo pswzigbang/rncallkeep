@@ -1,5 +1,6 @@
+import messaging from "@react-native-firebase/messaging";
 import React, { useEffect } from "react";
-import { PermissionsAndroid, Platform, SafeAreaView, Text } from "react-native";
+import { Alert, SafeAreaView } from "react-native";
 import RNCallKeep from "react-native-callkeep";
 
 import Callkeep from "./src/Callkeep";
@@ -24,6 +25,25 @@ const App = () => {
     // if (Platform.OS === "android") {
     //   OverlayPermissionModule.requestOverlayPermission();
     // }
+  }, []);
+
+  async function getFcmToken() {
+    const token = await messaging().getToken();
+    if (token) {
+      console.log("Your Firebase Token is:", token);
+    } else {
+      console.log("Failed to get Firebase Token");
+    }
+  }
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      console.log("A new FCM message arrived!", remoteMessage);
+      Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
+    });
+
+    getFcmToken();
+    return unsubscribe;
   }, []);
 
   return (
