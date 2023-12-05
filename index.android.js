@@ -18,7 +18,7 @@ const displayIncomingCall = (number) => {
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   console.log("Message handled in the background!", remoteMessage);
 
-  if (remoteMessage.notification?.body === "t1") {
+  if (remoteMessage.data?.body === "t1") {
     console.log("t1 !!!");
     displayIncomingCall(getRandomNumber());
   }
