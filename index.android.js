@@ -1,18 +1,10 @@
 import messaging from "@react-native-firebase/messaging";
 import { AppRegistry, PermissionsAndroid } from "react-native";
-import { v4 as uuidv4 } from "uuid";
 import RNCallKeep from "react-native-callkeep";
 
 import App from "./App";
 import { name as appName } from "./app.json";
-
-const getNewUuid = () => uuidv4();
-const getRandomNumber = () => String(Math.floor(Math.random() * 100000));
-const displayIncomingCall = (number) => {
-  const callUUID = getNewUuid();
-
-  RNCallKeep.displayIncomingCall(callUUID, number, number, "number", false);
-};
+import { displayIncomingCall, getRandomNumber } from "./src/lib/callkeep";
 
 // Handle background messages using setBackgroundMessageHandler
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
@@ -20,8 +12,24 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 
   if (remoteMessage.data?.body === "t1") {
     console.log("t1 !!!");
-    displayIncomingCall(getRandomNumber());
+    const randNum = getRandomNumber();
+    const uuid = displayIncomingCall(randNum);
+    console.log("uuid", uuid);
+    RNCallKeep.endCall(uuid);
+    RNCallKeep.backToForeground();
+    // setTimeout(() => {
+    //   console.log("uuid", uuid);
+    // }, 1000);
   }
+});
+
+RNCallKeep.addEventListener("answerCall", async ({ callUUID }) => {
+  RNCallKeep.endCall(callUUID);
+  RNCallKeep.backToForeground();
+
+  console.log("navigate");
+
+  //  RootNavigation.navigate("Call", {callUUID});
 });
 
 PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);

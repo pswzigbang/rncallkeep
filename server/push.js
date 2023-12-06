@@ -15,6 +15,9 @@ const message = {
     body: "t1",
   },
   token,
+  android: {
+    priority: "high",
+  },
 };
 
 admin
