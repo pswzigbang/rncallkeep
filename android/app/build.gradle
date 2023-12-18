@@ -123,6 +123,10 @@ dependencies {
     // compile project(':react-native-callkeep')
     implementation project(':react-native-callkeep')
     implementation 'com.google.firebase:firebase-messaging:23.3.1'
+
+    // incoming-call
+    implementation "com.jakewharton.timber:timber:4.7.1"
+    implementation "com.squareup.picasso:picasso:2.71828"
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

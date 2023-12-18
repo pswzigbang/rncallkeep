@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/zigbang_alert_dialog_radius"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:paddingHorizontal="18dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/grey1"
+            android:textStyle="bold"
+            tools:text="타이틀"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/text_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="18dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="설명" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="13dp"
+            android:orientation="horizontal">
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/btn_negative"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/secondary_button_radius"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:visibility="gone"
+                tools:text="@string/btnNegativeText" />
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/btn_positive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/primary_button_radius"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:text="@string/btnPositiveText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

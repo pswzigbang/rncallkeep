@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="grey1">#232323</color>
+    <color name="grey2">#757575</color>
+    <color name="grey3">#a6a6a6</color>
+    <color name="grey4">#bbbbbb</color>
+    <color name="grey5">#cccccc</color>
+    <color name="grey6">#e1e1e1</color>
+    <color name="grey7">#e5e5e5</color>
+    <color name="grey8">#eaeaea</color>
+    <color name="grey9">#eeeeee</color>
+    <color name="grey10">#f6f6f6</color>
+    <color name="grey11">#fafafa</color>
+    <color name="yellow1">#ffa409</color>
+    <color name="yellow2">#e59308</color>
+    <color name="orange1">#ff9600</color>
+    <color name="orange2">#80ff9600</color>
+    <color name="orange3">#ff7800</color>
+    <color name="orange4">#e56c00</color>
+    <color name="orange5">#7b3f04</color>
+    <color name="orange6">#ff6905</color>
+    <color name="red1">#ff5200</color>
+    <color name="red2">#F74A27</color>
+    <color name="red3">#E6f74a27</color>
+    <color name="red4">#F2C3472E</color>
+    <color name="blue1">#008fbf</color>
+    <color name="blue2">#3946c5</color>
+    <color name="green1">#36d085</color>
+    <color name="green2">#00ad69</color>
+    <color name="green3">#13b81b</color>
+    <color name="teal1">#0ec4bf</color>
+    <color name="teal2">#0db0ac</color>
+    <color name="teal3">#2a8987</color>
+    <color name="teal4">#e612beb8</color>
+    <color name="teal5">#e6099d98</color>
+    <color name="brown1">#948577</color>
+    <color name="brown2">#4a423b</color>
+    <color name="brown3">#E6493c3a</color>
+    <color name="brown4">#F2211919</color>
+    <color name="brown5">#3a2807</color>
+    <color name="white1">#ffffff</color>
+    <color name="white2">#ccffffff</color>
+    <color name="white3">#b3ffffff</color>
+    <color name="black1">#000000</color>
+    <color name="black2">#1a000000</color>
+    <color name="black3">#bf000000</color>
+    <color name="black4">#b2000000</color>
+    <color name="black5">#50000000</color>
+    <color name="black6">#99000000</color>
+    <color name="black7">#32000000</color>
+
+    <!-- incoming call -->
+    <color name="incomingCallBackground">#222222</color>
+</resources>

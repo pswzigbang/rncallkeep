@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">rncallkeep</string>
+
+    <!-- incoming call -->
+    <string name="incomingCallAccept">수락</string>
+    <string name="incomingCallDecline">거절</string>
+
+    <!-- dialog -->
+    <string name="btnPositiveText">확인</string>
+    <string name="btnNegativeText">취소</string>
 </resources>
